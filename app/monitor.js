@@ -21,7 +21,7 @@ var Monitor = React.createClass({
 
 			setInterval(function (){
 				that.run();
-			}, 1000 * 2);
+			}, 1000);
 		});
 
 		
