@@ -11,6 +11,7 @@ var hashHistory= ReactRouter.hashHistory
 var ReactDOM = require('react-dom');
 
 var Monitor = require('./monitor');
+var JsonForm = require('./components/JsonForm');
 
 var App = React.createClass({
 
@@ -27,6 +28,48 @@ var App = React.createClass({
 	}
 });
 
+var App2 = React.createClass({
+
+	getInitialState : function (){
+		return { 
+
+			data : { 	
+				"id" : 10001, 
+				"name" : "XC111-AT-DE"
+			},
+
+			scheme : {
+		        id : {
+		            typ : "text"
+		        },
+		        name : {
+		            typ : "text"
+		        }
+		    }
+		}
+	},
+
+	onChange : function (data){
+		alert(data);
+	},
+
+	getData : function (name){
+		return { val : this.state.data[name], list : [] }
+	},
+
+	render : function () {
+
+		return (<div className="container-fluid">
+					<div className="row">
+						<div className="col-xs-12">
+                            <JsonForm type={"form"} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+                        </div>   
+                    </div>
+				</div>);
+
+	}
+});
+
 App.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
@@ -34,6 +77,7 @@ App.contextTypes = {
 var routes = (
 	<Router history={hashHistory}>
         <Route path="/" component={App}></Route>
+        <Route path="json" component={App2}></Route>
 	</Router>
 );
 
