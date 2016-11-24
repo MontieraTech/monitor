@@ -73,7 +73,10 @@ var App2 = React.createClass({
 		else{
 			state.data[key]	= val;
 		}
-		this.setState(state);
+		// this.setState(state);
+
+        // $(".json-form-element").blur();
+
 	},
 
 	getData : function (id, name, callback){
@@ -94,15 +97,42 @@ var App2 = React.createClass({
 		return (<div className="container-fluid">
 					<div className="row">
 						<div className="col-xs-5">
-						
 							
-							<JsonForm type={"table"} data={this.state.data} id={"column-0-2"} dataSource={this} scheme={{ "country" : this.state.scheme.country }} onChange={this.onChange} />
+							<div className="row">
+								<div className="col-xs-12">
+									<table>
+										<th>A</th>
+										<th>B</th>
+										<th>C</th>
 
+										<tr>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-1"} dataSource={this} scheme={{ "id" : this.state.scheme.id }} onChange={this.onChange} /></td>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-2"} dataSource={this} scheme={{ "name" : this.state.scheme.name }} onChange={this.onChange} /></td>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-3"} dataSource={this} scheme={{ "country" : this.state.scheme.country }} onChange={this.onChange} /></td>
+										</tr>
+
+										<tr>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-1"} dataSource={this} scheme={{ "id" : this.state.scheme.id }} onChange={this.onChange} /></td>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-2"} dataSource={this} scheme={{ "days" : this.state.scheme.days }} onChange={this.onChange} /></td>
+											<td style={{"width" : "200px"}}><JsonForm type={"table"} data={this.state.data} id={"column-0-3"} dataSource={this} scheme={{ "country" : this.state.scheme.country }} onChange={this.onChange} /></td>
+										</tr>
+									</table>
+								</div>   
+                    		</div>
+							<div className="row" style={{"margin-top" : "100px"}}>
+								<div className="col-xs-12">
+									<JsonForm type={"form"} data={this.state.data} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+					    		</div>   
+                    		</div>
+
+                    									
+							
                         </div>   
                         <div className="col-xs-5 col-xs-offset-1">
                         	<div id="out"></div>
                         </div>   
                     </div>
+                   
 				</div>);
 
 	}

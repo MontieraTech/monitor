@@ -16,7 +16,7 @@ var PlaceHolder = React.createClass({
 
 	componentDidMount : function (){
 		var obj = this.props.data.val;
-		this.setState({ "val" : (obj.val || obj) })
+		this.setState({ "val" : (obj.val || obj) });
 	},
 
 	onClickEvent : function (){
@@ -24,7 +24,8 @@ var PlaceHolder = React.createClass({
 	},
 
 	onBlurEvent : function (val){
-		this.setState({ "mode" : "placeholder", "val" : val })
+		console.log("PlaceHolder blur " + val);
+		this.setState({ "mode" : "placeholder", "val" : val });
 	},
 
 	DomElement : function(){
@@ -38,7 +39,6 @@ var PlaceHolder = React.createClass({
 				return <TextBox data={props} />;
 			case "select":
 				return <Select data={props} />;
-				
 		}
 	},
 
@@ -54,7 +54,7 @@ var PlaceHolder = React.createClass({
 
 						: 
 
-						<div className="JsonForm-PlaceHolder" onClick={this.onClickEvent}>
+						<div className="JsonForm-PlaceHolder m-top" onClick={this.onClickEvent}>
 							{this.state.val}
 						</div>
 				}

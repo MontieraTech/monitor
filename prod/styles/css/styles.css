@@ -6,6 +6,7 @@
 
 .JsonForm-PlaceHolder {
   border: 1px solid #eee;
+  min-height : 25px;
 }
 
 .JsonForm-PlaceHolder:hover {

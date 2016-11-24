@@ -6,7 +6,7 @@ var React = require('react');
 
 var TextBox = React.createClass({
 
-	onBlurEvent : function (event){
+	onBlurEvent : function (){
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, this.refs.tbx.value);
 		}
@@ -18,12 +18,17 @@ var TextBox = React.createClass({
 
 	componentDidMount : function (){
 		this.refs.tbx.value = this.props.data.val;
+		$(this.refs.tbx).focus();
+	},
+
+	componentDidUpdate : function (){
+		$(this.refs.tbx).focus();
 	},
 
     render:function(){
         return (
            <div className="JsonForm-Component-Wrapper">
-				<input ref="tbx" type="text" className="form-control" onBlur={this.onBlurEvent} />
+				<input ref="tbx" type="text" className="form-control json-form-element" onBlur={this.onBlurEvent} />
 			</div>
         )
     }

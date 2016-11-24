@@ -74,7 +74,10 @@ var App2 = React.createClass({displayName: "App2",
 		else{
 			state.data[key]	= val;
 		}
-		this.setState(state);
+		// this.setState(state);
+
+        // $(".json-form-element").blur();
+
 	},
 
 	getData : function (id, name, callback){
@@ -95,15 +98,42 @@ var App2 = React.createClass({displayName: "App2",
 		return (React.createElement("div", {className: "container-fluid"}, 
 					React.createElement("div", {className: "row"}, 
 						React.createElement("div", {className: "col-xs-5"}, 
-						
 							
-							React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-2", dataSource: this, scheme: { "country" : this.state.scheme.country}, onChange: this.onChange})
+							React.createElement("div", {className: "row"}, 
+								React.createElement("div", {className: "col-xs-12"}, 
+									React.createElement("table", null, 
+										React.createElement("th", null, "A"), 
+										React.createElement("th", null, "B"), 
+										React.createElement("th", null, "C"), 
 
+										React.createElement("tr", null, 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-2", dataSource: this, scheme: { "name" : this.state.scheme.name}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-3", dataSource: this, scheme: { "country" : this.state.scheme.country}, onChange: this.onChange}))
+										), 
+
+										React.createElement("tr", null, 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-2", dataSource: this, scheme: { "days" : this.state.scheme.days}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-3", dataSource: this, scheme: { "country" : this.state.scheme.country}, onChange: this.onChange}))
+										)
+									)
+								)
+                    		), 
+							React.createElement("div", {className: "row", style: {"margin-top" : "100px"}}, 
+								React.createElement("div", {className: "col-xs-12"}, 
+									React.createElement(JsonForm, {type: "form", data: this.state.data, id: "myId", dataSource: this, scheme: this.state.scheme, onChange: this.onChange})
+					    		)
+                    		)
+
+                    									
+							
                         ), 
                         React.createElement("div", {className: "col-xs-5 col-xs-offset-1"}, 
                         	React.createElement("div", {id: "out"})
                         )
                     )
+                   
 				));
 
 	}
@@ -217,7 +247,7 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 
 	componentDidMount : function (){
 		var obj = this.props.data.val;
-		this.setState({ "val" : (obj.val || obj) })
+		this.setState({ "val" : (obj.val || obj) });
 	},
 
 	onClickEvent : function (){
@@ -225,7 +255,8 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 	},
 
 	onBlurEvent : function (val){
-		this.setState({ "mode" : "placeholder", "val" : val })
+		console.log("PlaceHolder blur " + val);
+		this.setState({ "mode" : "placeholder", "val" : val });
 	},
 
 	DomElement : function(){
@@ -239,7 +270,6 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 				return React.createElement(TextBox, {data: props});
 			case "select":
 				return React.createElement(Select, {data: props});
-				
 		}
 	},
 
@@ -255,7 +285,7 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 
 						: 
 
-						React.createElement("div", {className: "JsonForm-PlaceHolder", onClick: this.onClickEvent}, 
+						React.createElement("div", {className: "JsonForm-PlaceHolder m-top", onClick: this.onClickEvent}, 
 							this.state.val
 						)
 				
@@ -284,15 +314,21 @@ var Select = React.createClass({displayName: "Select",
         }
     },
 
-	onBlurEvent : function (event){
-		if(this.props.data.dataSource){
-			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, $(this.refs.slct).val().join(","));
-		}
-        
-        if(this.props.data.parent){
-            this.props.data.parent.onBlurEvent($(this.refs.slct).val().join(","));
+    onChangeEvent : function (event){
+
+        var val = $(this.refs.slct).val();
+        if(Array.isArray(val)){
+            val = val.join(",");
         }
-	},
+
+        if(this.props.data.dataSource){
+            this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, val);
+        }
+
+        if(this.props.data.parent){
+            this.props.data.parent.onBlurEvent(val);
+        }
+    },
 
 	componentDidMount : function (){
 
@@ -306,7 +342,6 @@ var Select = React.createClass({displayName: "Select",
                 "list" : obj.list
             })
         })
-
 	},
 
     componentDidUpdate : function (){
@@ -320,7 +355,7 @@ var Select = React.createClass({displayName: "Select",
         return (
            React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
 
-				React.createElement("select", {ref: "slct", className: "selectpicker", multiple: multiple, onChange: this.onBlurEvent}, 
+				React.createElement("select", {ref: "slct", className: "selectpicker json-form-element", multiple: multiple, onChange: this.onChangeEvent}, 
                 
                     this.state.list.map(function (val, idx){
                         var selected = 0;
@@ -375,7 +410,7 @@ var React = require('react');
 
 var TextBox = React.createClass({displayName: "TextBox",
 
-	onBlurEvent : function (event){
+	onBlurEvent : function (){
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, this.refs.tbx.value);
 		}
@@ -387,12 +422,17 @@ var TextBox = React.createClass({displayName: "TextBox",
 
 	componentDidMount : function (){
 		this.refs.tbx.value = this.props.data.val;
+		$(this.refs.tbx).focus();
+	},
+
+	componentDidUpdate : function (){
+		$(this.refs.tbx).focus();
 	},
 
     render:function(){
         return (
            React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
-				React.createElement("input", {ref: "tbx", type: "text", className: "form-control", onBlur: this.onBlurEvent})
+				React.createElement("input", {ref: "tbx", type: "text", className: "form-control json-form-element", onBlur: this.onBlurEvent})
 			)
         )
     }

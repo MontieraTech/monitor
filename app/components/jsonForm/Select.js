@@ -13,15 +13,21 @@ var Select = React.createClass({
         }
     },
 
-	onBlurEvent : function (event){
-		if(this.props.data.dataSource){
-			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, $(this.refs.slct).val().join(","));
-		}
-        
-        if(this.props.data.parent){
-            this.props.data.parent.onBlurEvent($(this.refs.slct).val().join(","));
+    onChangeEvent : function (event){
+
+        var val = $(this.refs.slct).val();
+        if(Array.isArray(val)){
+            val = val.join(",");
         }
-	},
+
+        if(this.props.data.dataSource){
+            this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, val);
+        }
+
+        if(this.props.data.parent){
+            this.props.data.parent.onBlurEvent(val);
+        }
+    },
 
 	componentDidMount : function (){
 
@@ -35,7 +41,6 @@ var Select = React.createClass({
                 "list" : obj.list
             })
         })
-
 	},
 
     componentDidUpdate : function (){
@@ -49,7 +54,7 @@ var Select = React.createClass({
         return (
            <div className="JsonForm-Component-Wrapper">
 
-				<select ref="slct" className="selectpicker" multiple={multiple} onChange={this.onBlurEvent}>
+				<select ref="slct" className="selectpicker json-form-element" multiple={multiple} onChange={this.onChangeEvent} >
                 {
                     this.state.list.map(function (val, idx){
                         var selected = 0;
