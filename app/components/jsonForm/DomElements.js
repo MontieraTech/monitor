@@ -48,6 +48,7 @@ var DomElement = {
 		var props = {
 			"id" : this.props.id,
 			"key" : key,
+			"mode" : this.props.type,
 			"typ" : typ,
 			"label" : (this.props.scheme[key].label || key),
 			"multiple" : this.props.scheme[key].multiple || false,

@@ -17,6 +17,10 @@ var Select = React.createClass({
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, $(this.refs.slct).val().join(","));
 		}
+        
+        if(this.props.data.parent){
+            this.props.data.parent.onBlurEvent($(this.refs.slct).val().join(","));
+        }
 	},
 
 	componentDidMount : function (){
@@ -45,14 +49,14 @@ var Select = React.createClass({
         return (
            <div className="JsonForm-Component-Wrapper">
 
-				<select ref="slct" className="selectpicker" multiple onChange={this.onBlurEvent}>
+				<select ref="slct" className="selectpicker" multiple={multiple} onChange={this.onBlurEvent}>
                 {
                     this.state.list.map(function (val, idx){
-                        var selected = "";
+                        var selected = 0;
                         if(that.state.values.indexOf("," + val.toLowerCase() + ",") >= 0){
-                            selected = "selected";
+                            selected = 1;
                         }
-                        return <option>{val}</option>
+                        return <option selected={selected}>{val}</option>
                     })
                 }
                 </select>

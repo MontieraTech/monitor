@@ -10,6 +10,10 @@ var TextBox = React.createClass({
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, this.refs.tbx.value);
 		}
+
+		if(this.props.data.parent){
+			this.props.data.parent.onBlurEvent(this.refs.tbx.value);
+		}
 	},
 
 	componentDidMount : function (){

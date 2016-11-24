@@ -3,27 +3,47 @@
 
 var React = require('react');
 var TextBox = require('./TextBox').Control;
+var Select = require('./Select').Control;
 
 var PlaceHolder = React.createClass({
 
 	getInitialState : function (){
 		return {
-			mode : "placeholder"  // "placeholder" or "control"
+			mode : "placeholder",  // "placeholder" or "control"
+			val : ""
 		}
+	},
+
+	componentDidMount : function (){
+		var obj = this.props.data.val;
+		this.setState({ "val" : (obj.val || obj) })
 	},
 
 	onClickEvent : function (){
 		this.setState({ "mode" : "control" })
 	},
 
+	onBlurEvent : function (val){
+		this.setState({ "mode" : "placeholder", "val" : val })
+	},
+
 	DomElement : function(){
+
+		var props = this.props.data;
+		props.val = this.state.val;
+    	props.parent = this;
+
 		switch(this.props.data.typ){
 			case "text":
-				return <TextBox data={this.props.data} />;
+				return <TextBox data={props} />;
+			case "select":
+				return <Select data={props} />;
+				
 		}
 	},
 
     render:function(){
+
         return (
            <div className="JsonForm-Component-Wrapper">
 				
@@ -35,7 +55,7 @@ var PlaceHolder = React.createClass({
 						: 
 
 						<div className="JsonForm-PlaceHolder" onClick={this.onClickEvent}>
-							{this.props.data.val}
+							{this.state.val}
 						</div>
 				}
 				

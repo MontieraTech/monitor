@@ -66,6 +66,14 @@ var App2 = React.createClass({
 
 	onChange : function (id, key, val){
 		$("#out").append("<div>[" + id + "][" + key + "][" + val + "]</div>");
+		var state = this.state;
+		if(state.data[key].val){
+			state.data[key].val = val;
+		}
+		else{
+			state.data[key]	= val;
+		}
+		this.setState(state);
 	},
 
 	getData : function (id, name, callback){
@@ -79,10 +87,17 @@ var App2 = React.createClass({
 
 	render : function () {
 
+		// <JsonForm type={"form"} data={this.state.data} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+		// <JsonForm type={"table"} data={this.state.data} id={"column-0-1"} dataSource={this} scheme={{ "id" : this.state.scheme.id }} onChange={this.onChange} />
+
+
 		return (<div className="container-fluid">
 					<div className="row">
 						<div className="col-xs-5">
-                            <JsonForm type={"form"} data={this.state.data} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+						
+							
+							<JsonForm type={"table"} data={this.state.data} id={"column-0-2"} dataSource={this} scheme={{ "country" : this.state.scheme.country }} onChange={this.onChange} />
+
                         </div>   
                         <div className="col-xs-5 col-xs-offset-1">
                         	<div id="out"></div>
