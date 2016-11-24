@@ -11,7 +11,7 @@ var hashHistory= ReactRouter.hashHistory
 var ReactDOM = require('react-dom');
 
 var Monitor = require('./monitor');
-var JsonForm = require('./components/JsonForm');
+var JsonForm = require('./components/JsonForm/main');
 
 var App = React.createClass({
 
@@ -35,7 +35,15 @@ var App2 = React.createClass({
 
 			data : { 	
 				"id" : 10001, 
-				"name" : "XC111-AT-DE"
+				"name" : "XC111-AT-DE",
+				"country" : { 
+					val : "DE",
+					list : ["IT","FR","DE"]
+				},
+				"days" : { 
+					val : "SU",
+					list : ["SU","MO","TU"]
+				}
 			},
 
 			scheme : {
@@ -44,25 +52,40 @@ var App2 = React.createClass({
 		        },
 		        name : {
 		            typ : "text"
+		        },
+		        country : {
+		        	typ : "select",
+		        	multiple : true
+		        },
+		        days : {
+		        	typ : "select"
 		        }
 		    }
 		}
 	},
 
-	onChange : function (data){
-		alert(data);
+	onChange : function (id, key, val){
+		$("#out").append("<div>[" + id + "][" + key + "][" + val + "]</div>");
 	},
 
-	getData : function (name){
-		return { val : this.state.data[name], list : [] }
+	getData : function (id, name, callback){
+		if(this.state.data[name].list){
+			callback(this.state.data[name]);
+		}
+		else{
+			callback({ val : this.state.data[name], list : [] })
+		}
 	},
 
 	render : function () {
 
 		return (<div className="container-fluid">
 					<div className="row">
-						<div className="col-xs-12">
-                            <JsonForm type={"form"} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+						<div className="col-xs-5">
+                            <JsonForm type={"form"} data={this.state.data} id={"myId"} dataSource={this} scheme={this.state.scheme} onChange={this.onChange} />
+                        </div>   
+                        <div className="col-xs-5 col-xs-offset-1">
+                        	<div id="out"></div>
                         </div>   
                     </div>
 				</div>);
