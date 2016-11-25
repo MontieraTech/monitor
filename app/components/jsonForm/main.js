@@ -2,6 +2,15 @@
 "use strict";
 
 /*
+<DOMElements.form.text data={} />
+
+<DomElements["form"]["text"] data={} />
+
+{
+	var d = DomElements["form"]["text"];
+	<d 
+}
+
 const DOMElements = {
 
 	"form" : {

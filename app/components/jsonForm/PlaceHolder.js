@@ -4,6 +4,9 @@
 var React = require('react');
 var TextBox = require('./TextBox').Control;
 var Select = require('./Select').Control;
+var CheckBox = require('./CheckBox').Control;
+var DateTime = require('./DateTime').Control;
+var File = require('./File').Control;
 
 var PlaceHolder = React.createClass({
 
@@ -37,13 +40,24 @@ var PlaceHolder = React.createClass({
 		switch(this.props.data.typ){
 			case "text":
 				return <TextBox data={props} />;
+
 			case "select":
 				return <Select data={props} />;
+
+			case "check":
+				return <CheckBox data={props} />;
+
+			case "datetime":
+				return <DateTime data={props} />;
+				
+			case "file":
+				return <File data={props} />;
 		}
 	},
 
     render:function(){
 
+    	var val = (this.state.val == null || this.state.val == "undefined") ? "" : this.state.val.toString();
         return (
            <div className="JsonForm-Component-Wrapper">
 				
@@ -55,7 +69,7 @@ var PlaceHolder = React.createClass({
 						: 
 
 						<div className="JsonForm-PlaceHolder m-top" onClick={this.onClickEvent}>
-							{this.state.val}
+							{val}
 						</div>
 				}
 				

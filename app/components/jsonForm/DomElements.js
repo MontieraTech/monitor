@@ -5,6 +5,9 @@ var React = require('react');
 
 var TextBoxForm = require('./TextBox').Form;
 var SelectForm = require('./Select').Form;
+var CheckBoxForm = require('./CheckBox').Form;
+var DateTimeForm = require('./DateTime').Form;
+var FileForm = require('./File').Form;
 
 var PlaceHolder = require('./PlaceHolder');
 
@@ -56,7 +59,7 @@ var DomElement = {
 			"dataSource" : this.props.dataSource  // parent.getData, parent.onChange
 		}
 
-		if(this.props.type == "table"){
+		if(this.props.type == "table-cell"){
 			return <PlaceHolder data={props} />
 		}
 
@@ -67,6 +70,15 @@ var DomElement = {
 
 			case "select":
 				return <SelectForm data={props} />;
+
+			case "check":
+				return <CheckBoxForm data={props} />;
+
+			case "datetime":
+				return <DateTimeForm data={props} />;
+
+			case "file":
+				return <FileForm data={props} />;
 		}
 	}
 
