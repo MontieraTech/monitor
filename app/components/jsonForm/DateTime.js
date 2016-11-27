@@ -31,14 +31,12 @@ var DateTime = React.createClass({
 
     render:function(){
         return (
-           <div className="JsonForm-Component-Wrapper">
-				<div className="form-group">
-                    <div ref="dt" className="input-group date json-form-element">
-                        <input ref="dtinpt" type="text" className="form-control" onBlur={this.onBlurEvent} />
-                        <span className="input-group-addon">
-                            <span className="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+           <div className="JsonCell-Component-Wrapper">
+                <div ref="dt" className="input-group date json-form-element">
+                    <input ref="dtinpt" type="text" className="form-control json-form-element" onBlur={this.onBlurEvent} />
+                    <span className="input-group-addon json-form-element">
+                        <span className="glyphicon glyphicon-calendar json-form-element"></span>
+                    </span>
                 </div>
 			</div>
         )

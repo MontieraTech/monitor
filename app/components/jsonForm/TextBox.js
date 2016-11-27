@@ -27,7 +27,7 @@ var TextBox = React.createClass({
 
     render:function(){
         return (
-           <div className="JsonForm-Component-Wrapper">
+           <div className="JsonCell-Component-Wrapper">
 				<input ref="tbx" type="text" className="form-control json-form-element" onBlur={this.onBlurEvent} />
 			</div>
         )

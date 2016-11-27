@@ -8,8 +8,6 @@ var CheckBox = React.createClass({
 
 	onClickEvent : function (){
 
-		console.log(this.refs.chkbx.checked);
-
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, this.refs.chkbx.checked);
 		}
@@ -25,13 +23,9 @@ var CheckBox = React.createClass({
 		}
 	},
 
-	componentDidUpdate : function (){
-		$(this.refs.chkbx).focus();
-	},
-
     render:function(){
         return (
-           <div className="JsonForm-Component-Wrapper">
+           <div className="JsonCell-Component-Wrapper">
 				<input ref="chkbx" type="checkbox" className="json-form-element" onClick={this.onClickEvent} />
 			</div>
         )
@@ -49,10 +43,10 @@ var CheckBoxForm = React.createClass({
         return (
            <div className="JsonForm-Component-Wrapper">
 				<div className="row m-top"> 
-                    <div className="col-xs-2">
+                    <div className="col-xs-6">
                     	{this.props.data.label}
                     </div>
-                    <div className="col-xs-6">
+                    <div className="col-xs-2">
                         <CheckBox data={this.props.data} />
                     </div>
                     <div className="col-xs-4"></div>

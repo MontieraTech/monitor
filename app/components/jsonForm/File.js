@@ -39,14 +39,16 @@ var File = React.createClass({
 
         return (
            <div className="JsonForm-Component-Wrapper">
-           		<input type='file' id='file' ref='file' style={{"width":"0", "height":"0"}} onChange={this.onChangeEvent} />
+           		<input type='file' id='file' className="json-form-element-file" ref='file' style={{"width":"0", "height":"0"}} onChange={this.onChangeEvent} onBlur={this.onChangeEvent} />
            		
            		<div className="row">
-           			<div className="col-xs-9">
-           				<input type="text" ref="filepath" style={{"width" : "100%"}} onBlur={this.onBlurEvent} />
-           			</div>
-           			<div className="col-xs-3">
-           				<button id='btn-upload'>Browse</button>
+           			<div className="col-xs-12">
+           				<div style={{"float":"left"}} >
+           					<input type="text" ref="filepath" className="json-form-element-file" onBlur={this.onBlurEvent} />
+           				</div>
+           				<div style={{"float":"left"}} >
+           					<button id='btn-upload' className="json-form-element-file">Browse</button>
+           				</div>
 					</div>
 				</div>
            		

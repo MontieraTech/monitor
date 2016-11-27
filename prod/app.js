@@ -121,20 +121,20 @@ var App2 = React.createClass({displayName: "App2",
 										React.createElement("th", null, "C"), 
 
 										React.createElement("tr", null, 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-2", dataSource: this, scheme: { "name" : this.state.scheme.name}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-0-3", dataSource: this, scheme: { "country" : this.state.scheme.country}, onChange: this.onChange}))
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-0-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-0-2", dataSource: this, scheme: { "name" : this.state.scheme.name}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-0-3", dataSource: this, scheme: { "country" : this.state.scheme.country}, onChange: this.onChange}))
 										), 
 
 										React.createElement("tr", null, 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-1-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-1-2", dataSource: this, scheme: { "days" : this.state.scheme.days}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-1-3", dataSource: this, scheme: { "isHidden" : this.state.scheme.isHidden}, onChange: this.onChange}))
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-1-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-1-2", dataSource: this, scheme: { "days" : this.state.scheme.days}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-1-3", dataSource: this, scheme: { "isHidden" : this.state.scheme.isHidden}, onChange: this.onChange}))
 										), 
 										React.createElement("tr", null, 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-2-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-2-2", dataSource: this, scheme: { "date" : this.state.scheme.date}, onChange: this.onChange})), 
-											React.createElement("td", {style: {"width" : "200px"}}, React.createElement(JsonForm, {type: "table", data: this.state.data, id: "column-2-3", dataSource: this, scheme: { "imageOnDisk" : this.state.scheme.imageOnDisk}, onChange: this.onChange}))
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-2-1", dataSource: this, scheme: { "id" : this.state.scheme.id}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-2-2", dataSource: this, scheme: { "date" : this.state.scheme.date}, onChange: this.onChange})), 
+											React.createElement("td", {style: {"width" : "250px"}}, React.createElement(JsonForm, {type: "table-cell", data: this.state.data, id: "column-2-3", dataSource: this, scheme: { "imageOnDisk" : this.state.scheme.imageOnDisk}, onChange: this.onChange}))
 										)
 									)
 								)
@@ -182,8 +182,6 @@ var CheckBox = React.createClass({displayName: "CheckBox",
 
 	onClickEvent : function (){
 
-		console.log(this.refs.chkbx.checked);
-
 		if(this.props.data.dataSource){
 			this.props.data.dataSource.onChange(this.props.data.id, this.props.data.key, this.refs.chkbx.checked);
 		}
@@ -199,13 +197,9 @@ var CheckBox = React.createClass({displayName: "CheckBox",
 		}
 	},
 
-	componentDidUpdate : function (){
-		$(this.refs.chkbx).focus();
-	},
-
     render:function(){
         return (
-           React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
+           React.createElement("div", {className: "JsonCell-Component-Wrapper"}, 
 				React.createElement("input", {ref: "chkbx", type: "checkbox", className: "json-form-element", onClick: this.onClickEvent})
 			)
         )
@@ -223,10 +217,10 @@ var CheckBoxForm = React.createClass({displayName: "CheckBoxForm",
         return (
            React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
 				React.createElement("div", {className: "row m-top"}, 
-                    React.createElement("div", {className: "col-xs-2"}, 
+                    React.createElement("div", {className: "col-xs-6"}, 
                     	this.props.data.label
                     ), 
-                    React.createElement("div", {className: "col-xs-6"}, 
+                    React.createElement("div", {className: "col-xs-2"}, 
                         React.createElement(CheckBox, {data: this.props.data})
                     ), 
                     React.createElement("div", {className: "col-xs-4"})
@@ -276,13 +270,11 @@ var DateTime = React.createClass({displayName: "DateTime",
 
     render:function(){
         return (
-           React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
-				React.createElement("div", {className: "form-group"}, 
-                    React.createElement("div", {ref: "dt", className: "input-group date json-form-element"}, 
-                        React.createElement("input", {ref: "dtinpt", type: "text", className: "form-control", onBlur: this.onBlurEvent}), 
-                        React.createElement("span", {className: "input-group-addon"}, 
-                            React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-                        )
+           React.createElement("div", {className: "JsonCell-Component-Wrapper"}, 
+                React.createElement("div", {ref: "dt", className: "input-group date json-form-element"}, 
+                    React.createElement("input", {ref: "dtinpt", type: "text", className: "form-control json-form-element", onBlur: this.onBlurEvent}), 
+                    React.createElement("span", {className: "input-group-addon json-form-element"}, 
+                        React.createElement("span", {className: "glyphicon glyphicon-calendar json-form-element"})
                     )
                 )
 			)
@@ -449,14 +441,16 @@ var File = React.createClass({displayName: "File",
 
         return (
            React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
-           		React.createElement("input", {type: "file", id: "file", ref: "file", style: {"width":"0", "height":"0"}, onChange: this.onChangeEvent}), 
+           		React.createElement("input", {type: "file", id: "file", className: "json-form-element-file", ref: "file", style: {"width":"0", "height":"0"}, onChange: this.onChangeEvent, onBlur: this.onChangeEvent}), 
            		
            		React.createElement("div", {className: "row"}, 
-           			React.createElement("div", {className: "col-xs-9"}, 
-           				React.createElement("input", {type: "text", ref: "filepath", style: {"width" : "100%"}, onBlur: this.onBlurEvent})
-           			), 
-           			React.createElement("div", {className: "col-xs-3"}, 
-           				React.createElement("button", {id: "btn-upload"}, "Browse")
+           			React.createElement("div", {className: "col-xs-12"}, 
+           				React.createElement("div", {style: {"float":"left"}}, 
+           					React.createElement("input", {type: "text", ref: "filepath", className: "json-form-element-file", onBlur: this.onBlurEvent})
+           				), 
+           				React.createElement("div", {style: {"float":"left"}}, 
+           					React.createElement("button", {id: "btn-upload", className: "json-form-element-file"}, "Browse")
+           				)
 					)
 				)
            		
@@ -502,7 +496,7 @@ module.exports = {
 var React = require('react');
 var TextBox = require('./TextBox').Control;
 var Select = require('./Select').Control;
-var CheckBox = require('./CheckBox').Control;
+var CheckBox = require('./CheckBox').Form;
 var DateTime = require('./DateTime').Control;
 var File = require('./File').Control;
 
@@ -518,6 +512,23 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 	componentDidMount : function (){
 		var obj = this.props.data.val;
 		this.setState({ "val" : (obj.val || obj) });
+
+		var that = this;
+		$(document).on("click", function (event){
+			
+			if(event.target.className == "json-form-element-file"){
+				return;
+			}
+
+			if(event.target.className == "glyphicon glyphicon-calendar" || 
+				event.target.className.indexOf("json-form-element") >= 0){
+				event.preventDefault();
+				return;
+			}
+
+			console.log(event.target.className);
+			that.setState({ "mode" : "placeholder" });	
+		})	
 	},
 
 	onClickEvent : function (){
@@ -557,7 +568,7 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 
     	var val = (this.state.val == null || this.state.val == "undefined") ? "" : this.state.val.toString();
         return (
-           React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
+           React.createElement("div", {className: "no-pad no-mrg"}, 
 				
 				
 					this.state.mode == "control" ? 
@@ -623,6 +634,12 @@ var Select = React.createClass({displayName: "Select",
                 "list" : obj.list
             })
         })
+
+        console.log($(this.refs.slct).parent().width());
+
+        $(this.refs.slct).width($(this.refs.slct).parent().width())
+
+        console.log($(this.refs.slct).width());
 	},
 
     componentDidUpdate : function (){
@@ -634,7 +651,7 @@ var Select = React.createClass({displayName: "Select",
         var that = this;
         var multiple = this.props.data.multiple || "";
         return (
-           React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
+           React.createElement("div", {className: "JsonCell-Component-Wrapper"}, 
 
 				React.createElement("select", {ref: "slct", className: "selectpicker json-form-element", multiple: multiple, onChange: this.onChangeEvent}, 
                 
@@ -712,7 +729,7 @@ var TextBox = React.createClass({displayName: "TextBox",
 
     render:function(){
         return (
-           React.createElement("div", {className: "JsonForm-Component-Wrapper"}, 
+           React.createElement("div", {className: "JsonCell-Component-Wrapper"}, 
 				React.createElement("input", {ref: "tbx", type: "text", className: "form-control json-form-element", onBlur: this.onBlurEvent})
 			)
         )

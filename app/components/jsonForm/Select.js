@@ -41,6 +41,12 @@ var Select = React.createClass({
                 "list" : obj.list
             })
         })
+
+        console.log($(this.refs.slct).parent().width());
+
+        $(this.refs.slct).width($(this.refs.slct).parent().width())
+
+        console.log($(this.refs.slct).width());
 	},
 
     componentDidUpdate : function (){
@@ -52,7 +58,7 @@ var Select = React.createClass({
         var that = this;
         var multiple = this.props.data.multiple || "";
         return (
-           <div className="JsonForm-Component-Wrapper">
+           <div className="JsonCell-Component-Wrapper">
 
 				<select ref="slct" className="selectpicker json-form-element" multiple={multiple} onChange={this.onChangeEvent} >
                 {

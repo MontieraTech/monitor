@@ -1,12 +1,27 @@
 
 
 .JsonForm-Component-Wrapper{
+  margin:0;
+  padding:0;
+  max-height:35px;
+}
 
+.JsonForm-Component-Wrapper .row{
+  padding:0;
+  margin:10px 0 0 0 ;
+}
+
+.JsonForm-Component-Wrapper .col-xs-12{
+  padding:0;
+  margin:0;
 }
 
 .JsonForm-PlaceHolder {
   border: 1px solid #eee;
   min-height : 35px;
+  margin:0;
+  padding:5px 0 0 5px;
+  text-align: left;
 }
 
 .JsonForm-PlaceHolder:hover {
@@ -14,5 +29,17 @@
 }
 
 .m-top {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
+}
+
+.JsonForm-Component-Wrapper .btn-default{
+  background-color: none;
+}
+
+.no-pad{
+  padding:0; 
+} 
+
+.no-mrg{
+  margin:0;
 }

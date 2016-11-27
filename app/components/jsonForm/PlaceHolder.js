@@ -4,7 +4,7 @@
 var React = require('react');
 var TextBox = require('./TextBox').Control;
 var Select = require('./Select').Control;
-var CheckBox = require('./CheckBox').Control;
+var CheckBox = require('./CheckBox').Form;
 var DateTime = require('./DateTime').Control;
 var File = require('./File').Control;
 
@@ -20,6 +20,23 @@ var PlaceHolder = React.createClass({
 	componentDidMount : function (){
 		var obj = this.props.data.val;
 		this.setState({ "val" : (obj.val || obj) });
+
+		var that = this;
+		$(document).on("click", function (event){
+			
+			if(event.target.className == "json-form-element-file"){
+				return;
+			}
+
+			if(event.target.className == "glyphicon glyphicon-calendar" || 
+				event.target.className.indexOf("json-form-element") >= 0){
+				event.preventDefault();
+				return;
+			}
+
+			console.log(event.target.className);
+			that.setState({ "mode" : "placeholder" });	
+		})	
 	},
 
 	onClickEvent : function (){
@@ -59,7 +76,7 @@ var PlaceHolder = React.createClass({
 
     	var val = (this.state.val == null || this.state.val == "undefined") ? "" : this.state.val.toString();
         return (
-           <div className="JsonForm-Component-Wrapper">
+           <div className="no-pad no-mrg">
 				
 				{
 					this.state.mode == "control" ? 
