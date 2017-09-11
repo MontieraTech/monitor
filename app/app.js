@@ -11,7 +11,7 @@ var hashHistory= ReactRouter.hashHistory
 var ReactDOM = require('react-dom');
 
 var Monitor = require('./monitor');
-var JsonForm = require('./components/JsonForm/main');
+// var JsonForm = require('./components/JsonForm/main');
 
 var App = React.createClass({
 
@@ -28,6 +28,7 @@ var App = React.createClass({
 	}
 });
 
+/*
 var App2 = React.createClass({
 
 	getInitialState : function (){
@@ -156,15 +157,17 @@ var App2 = React.createClass({
 
 	}
 });
+*/
 
 App.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
+// <Route path="json" component={App2}></Route>
+
 var routes = (
 	<Router history={hashHistory}>
         <Route path="/" component={App}></Route>
-        <Route path="json" component={App2}></Route>
 	</Router>
 );
 
