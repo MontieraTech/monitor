@@ -34,7 +34,6 @@ var PlaceHolder = React.createClass({
 				return;
 			}
 
-			console.log(event.target.className);
 			that.setState({ "mode" : "placeholder" });	
 		})	
 	},

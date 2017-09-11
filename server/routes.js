@@ -15,7 +15,8 @@ module.exports = function (app) {
     });
 
 	app.route('/cnfg').get(function (req, res) {
-		var cnfgPath = (process.env.NODE_ENV === 'development') ? "../../cnfg/monitor.json" : "/src/cnfg/monitor.json";
+		// var cnfgPath = (process.env.NODE_ENV === 'development') ? "../../cnfg/monitor.json" : "/src/cnfg/monitor.json";
+		var cnfgPath = "../monitor.json";
 		console.log("cnfg path = " + cnfgPath);
 		var cnfg = require(cnfgPath);
 		console.log(cnfg);

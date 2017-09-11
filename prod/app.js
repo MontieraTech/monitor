@@ -526,7 +526,6 @@ var PlaceHolder = React.createClass({displayName: "PlaceHolder",
 				return;
 			}
 
-			console.log(event.target.className);
 			that.setState({ "mode" : "placeholder" });	
 		})	
 	},
@@ -949,7 +948,7 @@ var Monitor = React.createClass({displayName: "Monitor",
 
 			setInterval(function (){
 				that.run();
-			}, 1000);
+			}, 5000);
 		});
 
 		
@@ -985,7 +984,7 @@ var Monitor = React.createClass({displayName: "Monitor",
 			// last ping didn't finish yet
 
 			// fail
-			if( Math.abs(Number(dt) - Number(obj.lastPing)) > (30 * 1000) ){
+			if( Math.abs(Number(dt) - Number(obj.lastPing)) > (60 * 1000) ){
 				console.log("[getNext] ending session ...");
 				obj.ping.push({ "status" : "fail - timeout" });
 				obj.lastPing = 0;
@@ -1048,7 +1047,9 @@ var Monitor = React.createClass({displayName: "Monitor",
 				return;
 			}
 
-			obj.lastCycle = new Date().getTime();
+			var now = new Date().getTime();
+			obj.lastCycle = now;
+			data.pingTime = now - obj.lastPing; // time to get results
 			obj.lastPing = 0;
 			if(!obj.ping){
 				obj.ping = [];
@@ -1094,10 +1095,23 @@ var Service = React.createClass({displayName: "Service",
 		var ttl = $.extend({}, that.props.data);
 		delete ttl.ping;
 
+		var avrgPingTime = 0, pings = that.props.data.ping || [];
+		for(var i=0 ; i<pings.length ; i++){
+			if(pings[i].pingTime){
+				avrgPingTime += Number(pings[i].pingTime);
+			}
+		}
+
+		if(avrgPingTime){
+			avrgPingTime = avrgPingTime / pings.length;
+			avrgPingTime = avrgPingTime.toFixed(2);
+		}
+
 		return (React.createElement("div", {className: "container-fluid"}, 
 					React.createElement("div", {className: "row", style: {"border-bottom" : "1px solid gray"}}, 
 						React.createElement("div", {className: "col-xs-3"}, 
-							React.createElement("h5", {title: JSON.stringify(ttl, null, "\t")}, that.props.data.name)
+							React.createElement("h4", {title: JSON.stringify(ttl, null, "\t")}, that.props.data.name), 
+							React.createElement("h5", null, "Average ping time: ", React.createElement("b", null, avrgPingTime))
 						), 
 						React.createElement("div", {className: "col-xs-9"}, 
 							
@@ -1119,11 +1133,23 @@ var Result = React.createClass({displayName: "Result",
 		var that = this;
 
 		if(!that.props.data || that.props.data.monitor_error){
-			return React.createElement("img", {src: "/images/red.png", title: JSON.stringify(that.props.data, null, "\t"), style: {"margin-right" : "2px"}})
+			return React.createElement("img", {src: "/images/red.png", title: JSON.stringify(that.props.data, null, "\t"), style: {"margin-right" : "2px", "width" : "10px", "height" : "10px"}})
 		}
 		else{
-			return React.createElement("img", {src: "/images/green.png", title: JSON.stringify(that.props.data, null, "\t"), style: {"margin-right" : "2px"}})
-		}
+			var n = that.props.data.pingTime || 0;
+			var img = 1;
+			if(n > 1500){
+				img = 4;
+			}
+			else if(n > 750){
+				img = 3;
+			}
+			else if(n > 300){
+				img = 2;
+			}
+
+			return React.createElement("img", {src: '/images/' + img + '.PNG', title: JSON.stringify(that.props.data, null, "\t"), style: {"margin-right" : "2px", "width" : "10px", "height" : "10px"}})
+		} 
 	}
 });
 

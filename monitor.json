@@ -1,0 +1,56 @@
+[
+	{
+		"name" : "Monitoring Server",
+		"typ" : "s2s",
+		"url" : "/monitor",
+		"cycle" : 10000
+	},
+	
+	{
+		"name" : "bitree",
+		"typ" : "s2s",
+		"url" : "http://bitree.rtbull.com/scr/login",
+		"cycle" : 10000
+	},
+	{
+		"name" : "DataMngr2 (client)",
+		"typ" : "cso",
+		"url" : "http://services.rtbull.com/monitor",
+		"cycle" : 10000
+	},
+
+	{
+		"name" : "DataMngr2 (S2S)",
+		"typ" : "s2s",
+		"url" : "http://services.rtbull.com/monitor",
+		"cycle" : 10000
+	},
+
+	{
+		"name" : "DataMngr2 (Adwords)",
+		"typ" : "s2s",
+		"url" : "http://services.rtbull.com/api/listAdwordsAccounts",
+		"cycle" : 10000
+	},
+
+	{
+		"name" : "GeTVShows (S2S)",
+		"typ" : "s2s",
+		"url" : "http://www.getvshows.com/getVrsn",
+		"cycle" : 10000
+	},
+
+	{
+		"name" : "GeTVShows (client)",
+		"typ" : "cso",
+		"url" : "http://getvshows.com/monitor",
+		"cycle" : 10000
+	},
+
+	{
+		"name" : "Best Antivirus Of 2017 (client)",
+		"typ" : "cso",
+		"url" : "http://en.best-antivirus-of-2017.com/monitor",
+		"cycle" : 10000
+	}
+]

@@ -21,7 +21,7 @@ var Monitor = React.createClass({
 
 			setInterval(function (){
 				that.run();
-			}, 1000);
+			}, 5000);
 		});
 
 		
@@ -57,7 +57,7 @@ var Monitor = React.createClass({
 			// last ping didn't finish yet
 
 			// fail
-			if( Math.abs(Number(dt) - Number(obj.lastPing)) > (30 * 1000) ){
+			if( Math.abs(Number(dt) - Number(obj.lastPing)) > (60 * 1000) ){
 				console.log("[getNext] ending session ...");
 				obj.ping.push({ "status" : "fail - timeout" });
 				obj.lastPing = 0;
@@ -120,7 +120,9 @@ var Monitor = React.createClass({
 				return;
 			}
 
-			obj.lastCycle = new Date().getTime();
+			var now = new Date().getTime();
+			obj.lastCycle = now;
+			data.pingTime = now - obj.lastPing; // time to get results
 			obj.lastPing = 0;
 			if(!obj.ping){
 				obj.ping = [];
@@ -166,10 +168,23 @@ var Service = React.createClass({
 		var ttl = $.extend({}, that.props.data);
 		delete ttl.ping;
 
+		var avrgPingTime = 0, pings = that.props.data.ping || [];
+		for(var i=0 ; i<pings.length ; i++){
+			if(pings[i].pingTime){
+				avrgPingTime += Number(pings[i].pingTime);
+			}
+		}
+
+		if(avrgPingTime){
+			avrgPingTime = avrgPingTime / pings.length;
+			avrgPingTime = avrgPingTime.toFixed(2);
+		}
+
 		return (<div className="container-fluid">
 					<div className="row" style={{"border-bottom" : "1px solid gray"}}>
 						<div className="col-xs-3">
-							<h5 title={JSON.stringify(ttl, null, "\t")}>{that.props.data.name}</h5>
+							<h4 title={JSON.stringify(ttl, null, "\t")}>{that.props.data.name}</h4>
+							<h5>Average ping time: <b>{avrgPingTime}</b></h5>
 						</div>
 						<div className="col-xs-9">
 							{
@@ -191,11 +206,23 @@ var Result = React.createClass({
 		var that = this;
 
 		if(!that.props.data || that.props.data.monitor_error){
-			return <img src='/images/red.png' title={JSON.stringify(that.props.data, null, "\t")} style={{"margin-right" : "2px"}} />
+			return <img src='/images/red.png' title={JSON.stringify(that.props.data, null, "\t")} style={{"margin-right" : "2px", "width" : "10px", "height" : "10px"}} />
 		}
 		else{
-			return <img src='/images/green.png' title={JSON.stringify(that.props.data, null, "\t")} style={{"margin-right" : "2px"}} />
-		}
+			var n = that.props.data.pingTime || 0;
+			var img = 1;
+			if(n > 1500){
+				img = 4;
+			}
+			else if(n > 750){
+				img = 3;
+			}
+			else if(n > 300){
+				img = 2;
+			}
+
+			return <img src={'/images/' + img + '.PNG'} title={JSON.stringify(that.props.data, null, "\t")} style={{"margin-right" : "2px", "width" : "10px", "height" : "10px"}} />
+		} 
 	}
 });
 
