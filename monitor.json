@@ -18,14 +18,18 @@
 		"url" : "http://services.rtbull.com/monitor",
 		"cycle" : 10000
 	},
-
+	{
+		"name" : "DataMngr2 (client, https)",
+		"typ" : "cso",
+		"url" : "https://services.rtbull.com/monitor",
+		"cycle" : 10000
+	},
 	{
 		"name" : "DataMngr2 (S2S)",
 		"typ" : "s2s",
 		"url" : "http://services.rtbull.com/monitor",
 		"cycle" : 10000
 	},
-
 	{
 		"name" : "DataMngr2 (Adwords)",
 		"typ" : "s2s",
@@ -39,18 +43,64 @@
 		"url" : "http://www.getvshows.com/getVrsn",
 		"cycle" : 10000
 	},
-
 	{
 		"name" : "GeTVShows (client)",
 		"typ" : "cso",
 		"url" : "http://getvshows.com/monitor",
 		"cycle" : 10000
 	},
-
 	{
-		"name" : "Best Antivirus Of 2017 (client)",
+		"name" : "TVStreame (S2S)",
+		"typ" : "s2s",
+		"url" : "http://www.tvstreame.com/getVrsn",
+		"cycle" : 10000
+	},
+	{
+		"name" : "TVStreame (client)",
 		"typ" : "cso",
-		"url" : "http://en.best-antivirus-of-2017.com/monitor",
+		"url" : "http://tvstreame.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopvpn (client)",
+		"typ" : "cso",
+		"url" : "http://bestopvpn.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopvpn (client, https)",
+		"typ" : "cso",
+		"url" : "https://bestopvpn.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopvpn (S2S)",
+		"typ" : "s2s",
+		"url" : "http://bestopvpn.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopantivirus (client)",
+		"typ" : "cso",
+		"url" : "http://bestopantivirus.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopantivirus (client, https)",
+		"typ" : "cso",
+		"url" : "https://bestopantivirus.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "Bestopantivirus (S2S)",
+		"typ" : "s2s",
+		"url" : "http://bestopantivirus.com/monitor",
+		"cycle" : 10000
+	},
+	{
+		"name" : "neuralassets (Client)",
+		"typ" : "cso",
+		"url" : "http://neuralassets.com/monitor",
 		"cycle" : 10000
 	}
 ]
